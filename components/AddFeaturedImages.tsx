@@ -120,6 +120,7 @@ export default function AddFeaturedImages({
             ))}
             {images?.map((img, index) => (
               <div key={index} className="flex items-center gap-5">
+                <div className="text-white">{index + 1}.</div>
                 <div className="relative aspect-square size-20">
                   <Image src={images[index].url} alt="featured image" fill />
                 </div>
