@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model FeaturedImages {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  images    ImageType[]
+}
+
+model Image {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  image         ImageType
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  categoryId    String 
+  category      Category    @relation(fields: [categoryId], references: [id])
+} 
+model Category {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String
+  images        Image[]
+}
+type ImageType {
+  key          String
+  name         String
+  url          String
+  size         Int
+  serverData   ServerData
+}
+
+type ServerData {
+  uploadedBy  String  
+}
