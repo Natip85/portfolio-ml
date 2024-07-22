@@ -28,7 +28,7 @@ export default function AddFeaturedImages({
   }, [featuredImages]);
 
   async function onSubmit() {
-    if (!images || images.length !== 7) return;
+    if (!images || images.length !== 8) return;
     try {
       await axios
         .post("/api/featured-images", {
@@ -55,7 +55,7 @@ export default function AddFeaturedImages({
   }
   return (
     <>
-      <div className=" rounded-lg border p-5 flex flex-col lg:flex-row  gap-5">
+      <div className=" rounded-lg  p-5 flex flex-col lg:flex-row  gap-5">
         <div className="flex-1 flex flex-col ">
           <UploadDropzone
             className="border border-secondary flex-grow"
@@ -83,7 +83,7 @@ export default function AddFeaturedImages({
         </div>
         <div className="flex-1 text-white">
           <div className="flex flex-col gap-3">
-            {selectedImages.length != 7 && images?.length !== 7 && (
+            {selectedImages.length != 8 && images?.length !== 8 && (
               <Alert className="bg-[#191919]">
                 <Terminal className="h-4 w-4 " color="white" />
                 <AlertTitle className="text-white text-2xl">
@@ -91,7 +91,7 @@ export default function AddFeaturedImages({
                 </AlertTitle>
                 <AlertDescription>
                   <p className="text-destructive text-base">
-                    You need to upload exactly 7 images to submit.
+                    You need to upload exactly 8 images to submit.
                   </p>
                   <p className="text-white">
                     These images will be displayed to users on the feature home
@@ -172,7 +172,7 @@ export default function AddFeaturedImages({
         <Button
           onClick={onSubmit}
           variant={"outline"}
-          disabled={images === undefined || (images && images.length !== 7)}
+          disabled={images === undefined || (images && images.length !== 8)}
         >
           Submit
         </Button>
