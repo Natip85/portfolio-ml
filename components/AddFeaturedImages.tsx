@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { UploadDropzone } from "./uploadthing";
 import { ImageType } from "@prisma/client";
-import { CheckCircle, Images, Terminal, X } from "lucide-react";
+import { CheckCircle, Images, Terminal, Trash2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -145,7 +145,7 @@ export default function AddFeaturedImages({
                   </div>
                 </div>
                 <div>
-                  <X
+                  <Trash2
                     onClick={() =>
                       setImages((prev) =>
                         prev ? prev.filter((_, i) => i !== index) : prev

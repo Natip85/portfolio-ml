@@ -13,7 +13,7 @@ export default function Navbar() {
         <Link href={"/"}>
           <h2 className="text-2xl md:text-4xl font-semibold text-white">ML</h2>
         </Link>
-        <div className="items-center gap-6 hidden md:flex">
+        <div className="items-center gap-6 hidden md:flex text-white">
           {NAV_ITEMS.map((item, index) => (
             <MenuItem key={item.title} item={item} />
           ))}
@@ -36,7 +36,7 @@ const MenuItem = ({ item }: { item: NavItem }) => {
         <>
           <button
             onClick={toggleSubMenu}
-            className={`flex flex-row items-center p-2 rounded-lg w-full justify-between ${
+            className={`flex flex-row items-center p-2 gap-3 rounded-lg w-full justify-between ${
               pathname.includes(item.path) ? "font-bold text-2xl" : ""
             }`}
           >
@@ -77,8 +77,8 @@ const MenuItem = ({ item }: { item: NavItem }) => {
       ) : (
         <Link
           href={item.path}
-          className={`flex  flex-row space-x-4 items-center p-2 rounded-lg  ${
-            item.path === pathname ? "font-bold text-black" : ""
+          className={`flex  flex-row space-x-4 items-center p-2   ${
+            item.path === pathname ? "font-bold border-b" : ""
           }`}
         >
           {item.icon && item.icon({ className: "size-4" })}

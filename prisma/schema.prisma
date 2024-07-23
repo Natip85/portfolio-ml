@@ -12,22 +12,18 @@ model FeaturedImages {
   images    ImageType[]
 }
 
-model Image {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+model GalleryImages {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  images     GalleryImage[]
+} 
+
+type GalleryImage {
   title         String
   description   String
   image         ImageType
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  categoryId    String 
-  category      Category    @relation(fields: [categoryId], references: [id])
-} 
-model Category {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  description   String
-  images        Image[]
+  category      String
 }
+
 type ImageType {
   key          String
   name         String

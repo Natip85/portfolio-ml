@@ -1,4 +1,4 @@
-import { BarChartBigIcon, Images, Star } from "lucide-react";
+import { BarChartBigIcon, Images, Star, Store } from "lucide-react";
 
 export type AdminNavItem = {
   title: string;
@@ -23,5 +23,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     title: "Gallery images",
     path: "/admin/galleryImages",
     icon: (props) => <Images {...props} />,
+  },
+  {
+    title: "Live website",
+    path: "/",
+    icon: (props) => <Store {...props} />,
   },
 ];

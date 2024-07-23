@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AdminTopbar() {
   return (
-    <div className="sticky inset-x-0 top-0 z-30 w-full transition-all border-b border-secondary md:hidden">
+    <div className="sticky inset-x-0 top-0 z-30 w-full transition-all border-b border-secondary md:hidden bg-black">
       <div className="flex h-[60px] items-center justify-between px-4">
         <div className="flex items-center space-x-4">
           <Link

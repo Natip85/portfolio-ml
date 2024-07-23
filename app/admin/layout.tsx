@@ -3,7 +3,6 @@ import PageWrapper from "@/components/PageWrapper";
 import AdminNavbarMobile from "@/components/nav/AdminNavbarMobile";
 import AdminSidebar from "@/components/nav/AdminSidebar";
 import AdminTopbar from "@/components/nav/AdminTopbar";
-import NavbarMobile from "@/components/nav/NavbarMobile";
 
 export const dynamic = "force-dynamic";
 export default function AdminLayout({
