@@ -53,6 +53,7 @@ export default function AddFeaturedImages({
       console.log(error, "Something went wrong posting images!");
     }
   }
+  async function handleDelete() {}
   return (
     <>
       <div className=" rounded-lg  p-5 flex flex-col lg:flex-row  gap-5">
@@ -146,11 +147,14 @@ export default function AddFeaturedImages({
                 </div>
                 <div>
                   <Trash2
-                    onClick={() =>
+                    onClick={() => {
+                      console.log("EDLETE>>>", img, index);
+
                       setImages((prev) =>
                         prev ? prev.filter((_, i) => i !== index) : prev
-                      )
-                    }
+                      );
+                      handleDelete();
+                    }}
                     className="text-destructive hover:text-destructive/70 cursor-pointer"
                   />
                 </div>

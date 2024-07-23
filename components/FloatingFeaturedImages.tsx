@@ -9,6 +9,13 @@ export default function FloatingFeaturedImages({
 }: {
   images: ImageType[];
 }) {
+  console.log("THESE????", images);
+  if (images.length === 0)
+    return (
+      <div className="text-white">
+        Be sure to add featured images in the admin.
+      </div>
+    );
   const plane1 = useRef(null);
   const plane2 = useRef(null);
   const plane3 = useRef(null);
@@ -63,18 +70,18 @@ export default function FloatingFeaturedImages({
       className="main"
     >
       <div ref={plane1} className="plane">
-        <Image src={images[0].url} alt="image" width={300} height={300} />
-        <Image src={images[1].url} alt="image" width={300} height={300} />
-        <Image src={images[2].url} alt="image" width={185} height={185} />
+        <Image src={images[0].url || ""} alt="image" width={300} height={300} />
+        <Image src={images[1].url || ""} alt="image" width={300} height={300} />
+        <Image src={images[2].url || ""} alt="image" width={185} height={185} />
       </div>
       <div ref={plane2} className="plane">
-        <Image src={images[3].url} alt="image" width={250} height={250} />
-        <Image src={images[4].url} alt="image" width={200} height={200} />
-        <Image src={images[5].url} alt="image" width={225} height={225} />
+        <Image src={images[3].url || ""} alt="image" width={250} height={250} />
+        <Image src={images[4].url || ""} alt="image" width={200} height={200} />
+        <Image src={images[5].url || ""} alt="image" width={225} height={225} />
       </div>
       <div ref={plane3} className="plane">
-        <Image src={images[6].url} alt="image" width={150} height={150} />
-        <Image src={images[7].url} alt="image" width={200} height={200} />
+        <Image src={images[6].url || ""} alt="image" width={150} height={150} />
+        <Image src={images[7].url || ""} alt="image" width={200} height={200} />
       </div>
       <div className="title">
         <p>Art by</p>
