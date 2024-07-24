@@ -1,4 +1,3 @@
-import db from "@/db/db";
 import { NextResponse } from "next/server";
 import { UTApi } from "uploadthing/server";
 

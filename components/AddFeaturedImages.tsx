@@ -81,7 +81,31 @@ export default function AddFeaturedImages({
       });
     }
   }
+  async function handleClearAll() {
+    try {
+      if (!images) return;
+      const imageKeys = images.map((img) => img.key);
+      console.log("FRONTIMG-KEYS>>>", imageKeys);
 
+      await axios.post("/api/uploadthing/delete-many", { imageKeys });
+
+      if (images && images.length > 0) {
+        await axios.delete(`/api/featured-images/delete-many`);
+      }
+      toast({
+        title: "Success!",
+        description: "All images removed.",
+        variant: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting all image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete all image.",
+        variant: "destructive",
+      });
+    }
+  }
   return (
     <>
       <div className=" rounded-lg  p-5 flex flex-col lg:flex-row  gap-5">
@@ -188,12 +212,13 @@ export default function AddFeaturedImages({
       <div className="my-5 flex items-center justify-between">
         <Button
           onClick={() => {
-            setImages(undefined);
+            handleClearAll();
             setSelectedImages([]);
+            setImages(undefined);
           }}
           className="text-destructive hover:bg-destructive hover:text-black"
         >
-          Clear images
+          Remove all images
         </Button>
         <Button
           onClick={onSubmit}
