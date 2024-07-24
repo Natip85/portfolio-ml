@@ -6,9 +6,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <motion.div
-        initial={{ x: 0, y: 0, opacity: 0 }}
+        initial={{ x: 400, y: 0, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeIn" }}
+        transition={{ duration: 1, ease: "easeInOut" }}
         className="relative h-[20vh] sm:h-[40vh]"
       >
         <Image

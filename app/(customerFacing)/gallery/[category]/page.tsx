@@ -1,6 +1,7 @@
 import ImageSlider from "@/components/ImageSlider";
 import db from "@/db/db";
 import Image from "next/image";
+
 async function getCategoryImages(category: string) {
   const galleryImages = await db.galleryImages.findMany({});
   console.log("ALLIMAGES>>>>", galleryImages);
@@ -13,20 +14,26 @@ async function getCategoryImages(category: string) {
     filteredCategories = singleImgs.filter((img) => img.category === category);
   }
   console.log("FILETREDCATEGORIES>>>", filteredCategories);
-  const urls = filteredCategories.map((img) => img.image.url);
-  console.log("FINALURLKS>>>", urls);
+  const result = filteredCategories.map((img) => ({
+    title: img.title,
+    description: img.description,
+    url: img.image.url,
+  }));
+  console.log("FINAL RESULT>>>", result);
 
   return {
-    urls,
+    images: result,
   };
 }
+
 export default async function CategoryPage({
   params: { category },
 }: {
   params: { category: string };
 }) {
   console.log("PARAMS>>>", category);
-  const { urls } = await getCategoryImages(category);
+  const { images } = await getCategoryImages(category);
+  console.log("THESE???????", images);
 
   return (
     <div className="relative min-h-screen">
@@ -39,11 +46,11 @@ export default async function CategoryPage({
       />
       <div className="absolute inset-0 bg-black opacity-50 z-10" />
       <h2 className="absolute z-20 inset-x-0 top-0 tracking-wider text-center text-2xl sm:text-4xl md:text-6xl my-10 text-white">
-        FEATURED PIECES
+        {category}
       </h2>
       <div className="relative p-2 gap-6 z-20">
         <div className="w-full">
-          <ImageSlider urls={urls} />
+          <ImageSlider images={images} />
         </div>
       </div>
     </div>

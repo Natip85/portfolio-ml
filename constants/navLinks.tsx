@@ -17,7 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
       { title: "Pastels", path: "/gallery/PASTELS" },
       { title: "Charcoal", path: "/gallery/CHARCOAL" },
       { title: "Acrylics", path: "/gallery/ACRYLICS" },
-      { title: "Multimedia & collage", path: "/gallery/MULTIMEDIACOLLAGE" },
+      // { title: "Multimedia & collage", path: "/gallery/MULTIMEDIACOLLAGE" },
     ],
   },
   {

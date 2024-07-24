@@ -32,7 +32,7 @@ export const AVAILABLE_CATEGORIES = [
   "PASTELS",
   "CHARCOAL",
   "ACRYLICS",
-  "MULTIMEDIACOLLAGE",
+  // "MULTIMEDIACOLLAGE",
 ];
 export const addGalleryImagesSchema = z.object({
   images: z

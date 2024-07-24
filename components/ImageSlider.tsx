@@ -10,16 +10,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 interface ImageSliderProps {
-  urls: string[];
+  // urls: string[];
+  images: {
+    title: string;
+    description: string;
+    url: string;
+  }[];
 }
 
-export default function ImageSlider({ urls }: ImageSliderProps) {
+export default function ImageSlider({ images }: ImageSliderProps) {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
-    isEnd: activeIndex === (urls.length ?? 0) - 1,
+    isEnd: activeIndex === (images.length ?? 0) - 1,
   });
 
   useEffect(() => {
@@ -27,10 +32,10 @@ export default function ImageSlider({ urls }: ImageSliderProps) {
       setActiveIndex(activeIndex);
       setSlideConfig({
         isBeginning: activeIndex === 0,
-        isEnd: activeIndex === (urls.length ?? 0) - 1,
+        isEnd: activeIndex === (images.length ?? 0) - 1,
       });
     });
-  }, [swiper, urls]);
+  }, [swiper, images]);
 
   const activeStyles =
     "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 place-items-center rounded-full border-2 bg-white border-zinc-300";
@@ -81,7 +86,7 @@ export default function ImageSlider({ urls }: ImageSliderProps) {
         slidesPerView={1}
         className="h-full w-full"
       >
-        {urls.map((url, i) => (
+        {images.map((url, i) => (
           // -z-10
           <SwiperSlide key={i} className="relative h-full w-full">
             <Image
@@ -89,15 +94,15 @@ export default function ImageSlider({ urls }: ImageSliderProps) {
               loading="eager"
               // -z-10
               className=" h-full w-full object-cover object-center"
-              src={url}
+              src={url.url}
               alt="Product image"
             />
             {/* z-50 */}
             <div className=" absolute z-50 inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
               <div className="text-center text-white">
-                <h2 className="text-lg font-semibold">Image Title</h2>
+                <h2 className="text-2xl mb-5 font-semibold">{url.title}</h2>
 
-                <p className="text-sm">Description or additional information</p>
+                <p className="text-sm w-2/3 mx-auto">{url.description}</p>
               </div>
             </div>
           </SwiperSlide>

@@ -50,7 +50,10 @@ export default function ContactForm() {
   return (
     <div className="flex-1">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 border shadow-md shadow-white p-5"
+        >
           <LabelInputContainer>
             <FormField
               control={form.control}
@@ -58,7 +61,11 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="NAME" />
+                    <Input
+                      {...field}
+                      placeholder="NAME"
+                      className="text-white border-0 border-b rounded-none outline-none  focus-visible:outline-none focus-visible:ring-0"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -72,7 +79,11 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="EMAIL" />
+                    <Input
+                      {...field}
+                      placeholder="EMAIL"
+                      className="text-white border-0 border-b rounded-none outline-none  focus-visible:outline-none focus-visible:ring-0"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,7 +97,11 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="SUBJECT" />
+                    <Input
+                      {...field}
+                      placeholder="SUBJECT"
+                      className="text-white border-0 border-b rounded-none outline-none  focus-visible:outline-none focus-visible:ring-0"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -100,7 +115,11 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="MESSAGE" />
+                    <Input
+                      {...field}
+                      placeholder="MESSAGE"
+                      className="text-white border-0 border-b rounded-none outline-none  focus-visible:outline-none focus-visible:ring-0"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -108,7 +127,11 @@ export default function ContactForm() {
             />
           </LabelInputContainer>
 
-          <Button variant={"secondary"} disabled={state.submitting}>
+          <Button
+            variant={"secondary"}
+            disabled={state.submitting}
+            className="w-full my-10"
+          >
             Submit
           </Button>
         </form>

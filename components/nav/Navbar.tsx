@@ -55,6 +55,7 @@ const MenuItem = ({ item }: { item: NavItem }) => {
               {item.submenuItems?.map((subItem, idx) => {
                 return (
                   <Link
+                    onClick={toggleSubMenu}
                     key={idx}
                     href={subItem.path}
                     className={`${

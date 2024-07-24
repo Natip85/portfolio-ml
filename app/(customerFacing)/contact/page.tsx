@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Image
-        src={"/images/test.png"}
+        src={"/images/floating_6.jpg"}
         alt="Background"
         fill
         priority
@@ -16,9 +16,9 @@ export default function ContactPage() {
       <div className="absolute inset-0 bg-black opacity-50" />
       <div className="z-30  flex flex-col gap-10">
         <motion.div
-          initial={{ x: 0, y: 0, opacity: 0 }}
+          initial={{ x: 0, y: -200, opacity: 0 }}
           animate={{ x: 0, y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
           className="tracking-wider text-center text-2xl sm:text-4xl md:text-6xl my-10 text-white "
         >
           CONTACT
