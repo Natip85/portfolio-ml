@@ -43,6 +43,7 @@ export default function AddFeaturedImages({
             variant: "success",
           });
           router.push("/admin");
+          router.refresh();
         })
         .catch(function (error) {
           toast({
@@ -87,7 +88,6 @@ export default function AddFeaturedImages({
       if (!images) return;
       setIsClearingAll(true);
       const imageKeys = images.map((img) => img.key);
-      console.log("FRONTIMG-KEYS>>>", imageKeys);
 
       await axios.post("/api/uploadthing/delete-many", { imageKeys });
 
@@ -198,8 +198,6 @@ export default function AddFeaturedImages({
                 <div>
                   <Trash2
                     onClick={() => {
-                      console.log("SELECTED-EDLETE>>>", img, index);
-
                       setImages((prev) =>
                         prev ? prev.filter((_, i) => i !== index) : prev
                       );

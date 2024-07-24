@@ -67,7 +67,6 @@ export default function AddGalleryImagesForm({
   const router = useRouter();
   const { toast } = useToast();
   const [selectedImages, setSelectedImages] = useState<ImageType[]>([]);
-  console.log("SELECTEDIMGS>>>", selectedImages);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
@@ -135,7 +134,9 @@ export default function AddGalleryImagesForm({
     }
   };
   form.watch();
-
+  function handleDeleteImage(key: string) {
+    console.log("THIS???", key);
+  }
   return (
     <div className="max-w-5xl mx-auto">
       <h1 className="text-white text-2xl md:text-4xl my-10">Gallery images</h1>
@@ -144,38 +145,6 @@ export default function AddGalleryImagesForm({
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col space-y-8"
         >
-          <div className="flex items-center justify-between">
-            <Button
-              type="button"
-              onClick={() =>
-                append({
-                  title: "",
-                  description: "",
-                  image: {
-                    name: "",
-                    serverData: {
-                      uploadedBy: "",
-                    },
-                    key: "",
-                    url: "",
-                    size: 0,
-                  },
-                  category: "",
-                })
-              }
-              className="bg-green-800 hover:bg-green-900"
-            >
-              <Plus className="mr-2" />
-              add image
-            </Button>
-            <Button
-              variant={"outline"}
-              type="submit"
-              disabled={isLoading || isImageLoading}
-            >
-              Submit
-            </Button>
-          </div>
           <ul className="space-y-8">
             {fields.map((item, index) => (
               <li
@@ -193,8 +162,8 @@ export default function AddGalleryImagesForm({
                       );
                       return updatedState;
                     });
+                    handleDeleteImage(item.image.key);
                   }}
-                  className=""
                 >
                   <Trash2 className="text-destructive hover:text-destructive/70" />
                 </Button>
