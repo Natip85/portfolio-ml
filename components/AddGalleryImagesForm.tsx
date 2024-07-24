@@ -134,8 +134,12 @@ export default function AddGalleryImagesForm({
     }
   };
   form.watch();
-  function handleDeleteImage(key: string) {
-    console.log("THIS???", key);
+  async function handleDeleteImage(img: ImageType) {
+    console.log("ITEM>>>>", img);
+
+    await axios.post("/api/uploadthing/delete", {
+      img,
+    });
   }
   return (
     <div className="max-w-5xl mx-auto">
@@ -155,6 +159,9 @@ export default function AddGalleryImagesForm({
                   type="button"
                   variant={"link"}
                   onClick={() => {
+                    console.log("IMGSTATE>>>", selectedImages);
+
+                    handleDeleteImage(selectedImages[index]);
                     remove(index);
                     setSelectedImages((prevState) => {
                       const updatedState = prevState.filter(
@@ -162,7 +169,6 @@ export default function AddGalleryImagesForm({
                       );
                       return updatedState;
                     });
-                    handleDeleteImage(item.image.key);
                   }}
                 >
                   <Trash2 className="text-destructive hover:text-destructive/70" />
@@ -296,11 +302,6 @@ export default function AddGalleryImagesForm({
                                         : res.map((img) => ({ ...img, index }));
                                       return updatedState;
                                     });
-
-                                    //   form.setValue(
-                                    //     `images.${index}.image`,
-                                    //     res[0]
-                                    //   );
                                     field.onChange(res[0]);
                                     setIsImageLoading(false);
                                   }}
@@ -310,14 +311,6 @@ export default function AddGalleryImagesForm({
                                   onUploadProgress={() => {
                                     setIsImageLoading(true);
                                   }}
-                                  // content={{
-                                  //   button({ ready }) {
-                                  //     if (ready)
-                                  //       return <div>Upload an image</div>;
-
-                                  //     return "Getting ready...";
-                                  //   },
-                                  // }}
                                 />
                               </div>
                             )}
