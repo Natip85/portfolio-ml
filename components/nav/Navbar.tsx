@@ -42,11 +42,7 @@ const MenuItem = ({ item }: { item: NavItem }) => {
           >
             <div className="flex flex-row space-x-4 items-center">
               {item.icon && item.icon({ className: "size-4" })}
-              <span className="flex">
-                <Link href={item.path} className="hover:font-bold text-2xl">
-                  {item.title}
-                </Link>
-              </span>
+              <span className="hover:font-bold text-2xl">{item.title}</span>
             </div>
 
             <div className={`${subMenuOpen ? "rotate-180" : ""} flex`}>

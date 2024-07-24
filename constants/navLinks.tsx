@@ -8,13 +8,16 @@ export type NavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    title: "Featured",
-    path: "/featured",
+    title: "Gallery",
+    path: "#",
     submenu: true,
     submenuItems: [
-      { title: "All", path: "/featured" },
-      { title: "Water colors", path: "/watercolors" },
-      { title: "Water colors", path: "/watercolors" },
+      { title: "All", path: "/gallery/ALL" },
+      { title: "Water colors", path: "/gallery/WATERCOLORS" },
+      { title: "Pastels", path: "/gallery/PASTELS" },
+      { title: "Charcoal", path: "/gallery/CHARCOAL" },
+      { title: "Acrylics", path: "/gallery/ACRYLICS" },
+      { title: "Multimedia & collage", path: "/gallery/MULTIMEDIACOLLAGE" },
     ],
   },
   {
