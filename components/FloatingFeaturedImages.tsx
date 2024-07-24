@@ -10,12 +10,7 @@ export default function FloatingFeaturedImages({
   images: ImageType[];
 }) {
   console.log("THESE????", images);
-  if (images.length !== 8)
-    return (
-      <div className="text-white">
-        Be sure to add featured images in the admin.
-      </div>
-    );
+
   const plane1 = useRef(null);
   const plane2 = useRef(null);
   const plane3 = useRef(null);
@@ -61,7 +56,12 @@ export default function FloatingFeaturedImages({
       requestAnimationFrameId = null;
     }
   };
-
+  if (images.length !== 8)
+    return (
+      <div className="text-white">
+        Be sure to add featured images in the admin.
+      </div>
+    );
   return (
     <main
       onMouseMove={(e) => {
