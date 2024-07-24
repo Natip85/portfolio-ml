@@ -10,6 +10,7 @@ import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 import { FeaturedImages } from "@prisma/client";
+
 type AddFeaturedImagesProps = {
   featuredImages: FeaturedImages[];
 };
@@ -53,7 +54,20 @@ export default function AddFeaturedImages({
       console.log(error, "Something went wrong posting images!");
     }
   }
-  async function handleDelete() {}
+  async function handleDelete(img: ImageType, index: number) {
+    if (!img) return;
+
+    const response = await axios.post("/api/uploadthing/delete", {
+      img,
+      index,
+    });
+
+    toast({
+      title: "Success!",
+      description: response.data.message || "Image deleted successfully.",
+      variant: "success",
+    });
+  }
   return (
     <>
       <div className=" rounded-lg  p-5 flex flex-col lg:flex-row  gap-5">
@@ -131,12 +145,6 @@ export default function AddFeaturedImages({
                   <div className="flex items-center gap-5 text-muted-foreground">
                     <span>Size: {img.size}</span>
 
-                    {selectedImages.length > 0 && (
-                      <span className="flex items-center gap-3">
-                        Status: selected
-                        <CheckCircle className="text-yellow-500" />{" "}
-                      </span>
-                    )}
                     {images && (
                       <span className="flex items-center gap-3">
                         Status: success
@@ -148,12 +156,12 @@ export default function AddFeaturedImages({
                 <div>
                   <Trash2
                     onClick={() => {
-                      console.log("EDLETE>>>", img, index);
+                      console.log("SELECTED-EDLETE>>>", img, index);
 
                       setImages((prev) =>
                         prev ? prev.filter((_, i) => i !== index) : prev
                       );
-                      handleDelete();
+                      handleDelete(img, index);
                     }}
                     className="text-destructive hover:text-destructive/70 cursor-pointer"
                   />

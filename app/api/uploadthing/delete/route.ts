@@ -1,0 +1,37 @@
+import db from "@/db/db";
+import { NextResponse } from "next/server";
+import { UTApi } from "uploadthing/server";
+
+const utapi = new UTApi();
+export async function POST(req: Request) {
+  try {
+    const imageKey = await req.json();
+
+    const key = imageKey.img.key;
+    const imgIndex = imageKey.index;
+    console.log("IMGI>>>", imgIndex);
+
+    const res = await utapi.deleteFiles(key);
+
+    const galleryImage = await db.featuredImages.findMany();
+    console.log("GALLIMGZ>>>>", galleryImage);
+
+    if (galleryImage) {
+      const updatedImages = galleryImage[0].images.filter(
+        (_, i) => i !== imgIndex
+      );
+      console.log("UPDATEDIMAGES>>>>", updatedImages);
+
+      await db.featuredImages.updateMany({
+        data: {
+          images: updatedImages,
+        },
+      });
+    }
+
+    return NextResponse.json(res);
+  } catch (error) {
+    console.log("error at uploadthing/delete", error);
+    return new NextResponse("Internal Server Error/ delete", { status: 500 });
+  }
+}

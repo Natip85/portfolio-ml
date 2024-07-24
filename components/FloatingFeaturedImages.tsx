@@ -10,7 +10,7 @@ export default function FloatingFeaturedImages({
   images: ImageType[];
 }) {
   console.log("THESE????", images);
-  if (images.length === 0)
+  if (images.length !== 8)
     return (
       <div className="text-white">
         Be sure to add featured images in the admin.
