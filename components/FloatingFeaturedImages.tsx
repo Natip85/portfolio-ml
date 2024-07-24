@@ -9,8 +9,6 @@ export default function FloatingFeaturedImages({
 }: {
   images: ImageType[];
 }) {
-  console.log("THESE????", images);
-
   const plane1 = useRef(null);
   const plane2 = useRef(null);
   const plane3 = useRef(null);

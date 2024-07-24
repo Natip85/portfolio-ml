@@ -54,20 +54,34 @@ export default function AddFeaturedImages({
       console.log(error, "Something went wrong posting images!");
     }
   }
+
   async function handleDelete(img: ImageType, index: number) {
     if (!img) return;
-
-    const response = await axios.post("/api/uploadthing/delete", {
-      img,
-      index,
-    });
-
-    toast({
-      title: "Success!",
-      description: response.data.message || "Image deleted successfully.",
-      variant: "success",
-    });
+    try {
+      await axios.post("/api/uploadthing/delete", {
+        img,
+        index,
+      });
+      if (images && images.length > 0) {
+        await axios.delete(`/api/featured-images/delete`, {
+          data: { index },
+        });
+      }
+      toast({
+        title: "Success!",
+        description: "Image deleted successfully.",
+        variant: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete image.",
+        variant: "destructive",
+      });
+    }
   }
+
   return (
     <>
       <div className=" rounded-lg  p-5 flex flex-col lg:flex-row  gap-5">

@@ -8,26 +8,8 @@ export async function POST(req: Request) {
     const imageKey = await req.json();
 
     const key = imageKey.img.key;
-    const imgIndex = imageKey.index;
-    console.log("IMGI>>>", imgIndex);
 
     const res = await utapi.deleteFiles(key);
-
-    const galleryImage = await db.featuredImages.findMany();
-    console.log("GALLIMGZ>>>>", galleryImage);
-
-    if (galleryImage) {
-      const updatedImages = galleryImage[0].images.filter(
-        (_, i) => i !== imgIndex
-      );
-      console.log("UPDATEDIMAGES>>>>", updatedImages);
-
-      await db.featuredImages.updateMany({
-        data: {
-          images: updatedImages,
-        },
-      });
-    }
 
     return NextResponse.json(res);
   } catch (error) {
