@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { UploadDropzone } from "./uploadthing";
 import { ImageType } from "@prisma/client";
-import { CheckCircle, Images, Terminal, Trash2 } from "lucide-react";
+import { CheckCircle, Images, Loader2, Terminal, Trash2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -20,6 +20,7 @@ export default function AddFeaturedImages({
   const router = useRouter();
   const { toast } = useToast();
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [isClearingAll, setIsClearingAll] = useState(false);
   const [images, setImages] = useState<ImageType[]>();
 
   useEffect(() => {
@@ -84,6 +85,7 @@ export default function AddFeaturedImages({
   async function handleClearAll() {
     try {
       if (!images) return;
+      setIsClearingAll(true);
       const imageKeys = images.map((img) => img.key);
       console.log("FRONTIMG-KEYS>>>", imageKeys);
 
@@ -97,6 +99,7 @@ export default function AddFeaturedImages({
         description: "All images removed.",
         variant: "success",
       });
+      setIsClearingAll(false);
     } catch (error) {
       console.error("Error deleting all image:", error);
       toast({
@@ -104,6 +107,7 @@ export default function AddFeaturedImages({
         description: "Failed to delete all image.",
         variant: "destructive",
       });
+      setIsClearingAll(false);
     }
   }
   return (
@@ -211,14 +215,22 @@ export default function AddFeaturedImages({
       </div>
       <div className="my-5 flex items-center justify-between">
         <Button
+          disabled={isClearingAll}
           onClick={() => {
             handleClearAll();
             setSelectedImages([]);
             setImages(undefined);
           }}
-          className="text-destructive hover:bg-destructive hover:text-black"
+          className="text-destructive bg-destructive/10 hover:bg-destructive hover:text-black"
         >
-          Remove all images
+          {isClearingAll ? (
+            <div className="flex items-center gap-3">
+              <span> Removing all images</span>
+              <Loader2 className="size-5 animate-spin text-white" />
+            </div>
+          ) : (
+            <div>Remove all images</div>
+          )}
         </Button>
         <Button
           onClick={onSubmit}
